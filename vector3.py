@@ -30,6 +30,9 @@ class Vec3:
     def b(self):
         return self.e2
 
+    def __eq__(self, other):
+        return False
+
     def __add__(self, other):
         return Vec3(self.e0 + other.e0, self.e1 + other.e1, self.e2 + other.e2)
 
@@ -57,4 +60,5 @@ class Vec3:
 
     def length(self):
         return math.sqrt(self.e0 * self.e0 + self.e1 * self.e1 + self.e2 * self.e2)
+
 
