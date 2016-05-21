@@ -36,14 +36,60 @@ class Vec3:
     def __add__(self, other):
         return Vec3(self.e0 + other.e0, self.e1 + other.e1, self.e2 + other.e2)
 
+    def __iadd__(self, other):
+        if isinstance(other, self.__class__):
+            self.e0 += other.e0
+            self.e1 += other.e1
+            self.e2 += other.e2
+        else:
+            self.e0 += other
+            self.e1 += other
+            self.e2 += other
+
     def __sub__(self, other):
         return Vec3(self.e0 - other.e0, self.e1 - other.e1, self.e2 - other.e2)
 
+    def __isub__(self, other):
+        if isinstance(other, self.__class__):
+            self.e0 -= other.e0
+            self.e1 -= other.e1
+            self.e2 -= other.e2
+        else:
+            self.e0 -= other
+            self.e1 -= other
+            self.e2 -= other
+
     def __mul__(self, other):
-        return Vec3(self.e0 * other.e0, self.e1 * other.e1, self.e2 * other.e2)
+        if isinstance(other, self.__class__):
+            return Vec3(self.e0 * other.e0, self.e1 * other.e1, self.e2 * other.e2)
+        else:
+            return Vec3(self.e0 * other, self.e1 * other, self.e2 * other)
+
+    def __imul__(self, other):
+        if isinstance(other, self.__class__):
+            self.e0 *= other.e0
+            self.e1 *= other.e1
+            self.e2 *= other.e2
+        else:
+            self.e0 *= other
+            self.e1 *= other
+            self.e2 *= other
 
     def __div__(self, other):
-        return Vec3(self.e0 / other.e0, self.e1 / other.e1, self.e2 / other.e2)
+        if isinstance(other, self.__class__):
+            return Vec3(self.e0 / other.e0, self.e1 / other.e1, self.e2 / other.e2)
+        else:
+            return Vec3(self.e0 / other, self.e1 / other, self.e2 / other)
+
+    def __idiv__(self, other):
+        if isinstance(other, self.__class__):
+            self.e0 /= other.e0
+            self.e1 /= other.e1
+            self.e2 /= other.e2
+        else:
+            self.e0 /= other
+            self.e1 /= other
+            self.e2 /= other
 
     @staticmethod
     def dot(v1, v2):

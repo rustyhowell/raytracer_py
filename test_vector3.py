@@ -18,10 +18,22 @@ class TestVec3(unittest.TestCase):
         v = Vec3(1, 2, 3)
         self.assertEqual(v.squared_length(), 14.0)
 
-    def test_scalar_mul(self):
+    def test_mul_scalar(self):
         v = Vec3(1, 2, 3)
         v2 = v * 2
         self.assertEqual(v2.r, 2)
         self.assertEqual(v2.g, 4)
-        self.assertEqual(v2.b, 5)
-        
+        self.assertEqual(v2.b, 6)
+
+        self.assertEqual(v.r, 1)
+
+    def test_mul_vecl(self):
+        v = Vec3(1, 2, 3)
+        v2 = Vec3(3, 4, 5)
+        v3 = v * v2
+        self.assertEqual(v3.r, 3)
+        self.assertEqual(v3.g, 8)
+        self.assertEqual(v3.b, 15)
+
+        self.assertEqual(v.r, 1)
+        self.assertEqual(v2.r, 3)
