@@ -17,7 +17,7 @@ if __name__ == '__main__':
         horizontal = Vec3(4, 0, 0)
         vertical = Vec3(0, 2, 0)
         origin = Vec3(0, 0, 0)
-        for j in xrange(ny-1, 0, -1):
+        for j in xrange(ny-1, -1, -1):
             for i in xrange(nx):
                 u = float(i) / nx
                 v = float(j) / ny
