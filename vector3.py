@@ -1,10 +1,10 @@
 import math
 
 class Vec3:
-    def __init__(self, e1, e2, e3):
-        self.e0 = float(e1)
-        self.e1 = float(e2)
-        self.e2 = float(e3)
+    def __init__(self, e0, e1, e2):
+        self.e0 = float(e0)
+        self.e1 = float(e1)
+        self.e2 = float(e2)
 
     @property
     def x(self):
@@ -31,7 +31,7 @@ class Vec3:
         return self.e2
 
     def __eq__(self, other):
-        return False
+        return self.e0 == other.e0 and self.e1 == other.e1 and self.e2 == other.e2
 
     def __add__(self, other):
         return Vec3(self.e0 + other.e0, self.e1 + other.e1, self.e2 + other.e2)
@@ -45,6 +45,7 @@ class Vec3:
             self.e0 += other
             self.e1 += other
             self.e2 += other
+        return self
 
     def __sub__(self, other):
         return Vec3(self.e0 - other.e0, self.e1 - other.e1, self.e2 - other.e2)
@@ -58,6 +59,7 @@ class Vec3:
             self.e0 -= other
             self.e1 -= other
             self.e2 -= other
+        return self
 
     def __mul__(self, other):
         if isinstance(other, self.__class__):
@@ -74,6 +76,7 @@ class Vec3:
             self.e0 *= other
             self.e1 *= other
             self.e2 *= other
+        return self
 
     def __div__(self, other):
         if isinstance(other, self.__class__):
@@ -90,10 +93,10 @@ class Vec3:
             self.e0 /= other
             self.e1 /= other
             self.e2 /= other
+        return self
 
-    @staticmethod
-    def dot(v1, v2):
-        return v1.e0 * v2.e0 + v1.e1 * v2.e1 + v1.e2 * v2.e2
+    def dot(self, other):
+        return self.e0 * other.e0 + self.e1 * other.e1 + self.e2 * other.e2
 
     @staticmethod
     def cross(v1, v2):
