@@ -98,6 +98,9 @@ class Vec3:
     def dot(self, other):
         return self.e0 * other.e0 + self.e1 * other.e1 + self.e2 * other.e2
 
+    def __repr__(self):
+        return 'x={},y={},z={}'.format(self.e0, self.e1, self.e2)
+
     @staticmethod
     def cross(v1, v2):
         return Vec3(v1.e1 * v2.e2 - v1.e2 * v2.e1,
@@ -110,4 +113,6 @@ class Vec3:
     def length(self):
         return math.sqrt(self.e0 * self.e0 + self.e1 * self.e1 + self.e2 * self.e2)
 
-
+    def unit_vector(self):
+        m = max(math.fabs(self.e0), math.fabs(self.e1), math.fabs(self.e2))
+        return self / m

@@ -119,3 +119,10 @@ class TestVec3(unittest.TestCase):
 
         self.assertEqual(v1.r, 5)
         self.assertEqual(v1.g, 4)
+
+    def test_unit_vector(self):
+        v = Vec3(5, 10, 20)
+        u = v.unit_vector()
+        self.assertEqual(u.r, 0.25)
+        self.assertEqual(u.g, 0.50)
+        self.assertEqual(u.b, 1.0)
