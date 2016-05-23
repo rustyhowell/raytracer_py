@@ -110,9 +110,10 @@ class Vec3:
     def length(self):
         return math.sqrt(self.e0 * self.e0 + self.e1 * self.e1 + self.e2 * self.e2)
 
-    def unit_vector(self):
-        m = max(math.fabs(self.e0), math.fabs(self.e1), math.fabs(self.e2))
-        return self / m
+
+def unit_vector(v):
+    m = max(math.fabs(v.e0), math.fabs(v.e1), math.fabs(v.e2))
+    return v / m
 
 
 def dot(this, other):

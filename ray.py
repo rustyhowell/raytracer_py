@@ -16,4 +16,4 @@ class Ray:
         return self.B
 
     def point_at_parameter(self, t):
-        return self.A + t * self.B
+        return self.A + self.B * t
