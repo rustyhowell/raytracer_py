@@ -95,9 +95,6 @@ class Vec3:
             self.e2 /= other
         return self
 
-    def dot(self, other):
-        return self.e0 * other.e0 + self.e1 * other.e1 + self.e2 * other.e2
-
     def __repr__(self):
         return 'x={},y={},z={}'.format(self.e0, self.e1, self.e2)
 
@@ -116,3 +113,7 @@ class Vec3:
     def unit_vector(self):
         m = max(math.fabs(self.e0), math.fabs(self.e1), math.fabs(self.e2))
         return self / m
+
+
+def dot(this, other):
+    return this.e0 * other.e0 + this.e1 * other.e1 + this.e2 * other.e2
