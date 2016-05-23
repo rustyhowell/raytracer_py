@@ -1,8 +1,10 @@
 #!/usr/bin/env python
+
+from progressbar import ProgressBar, Percentage, ETA, Bar
+import time
 from vector3 import Vec3, dot, unit_vector
 from ray import Ray
 from hitable import Sphere, HitableList, HitRecord
-
 
 
 def color(ray_, world):
@@ -17,20 +19,22 @@ def color(ray_, world):
 
 
 if __name__ == '__main__':
+    nx = 200
+    ny = 100
+
+    lower_left = Vec3(-2, -1, -1)
+    horizontal = Vec3(4, 0, 0)
+    vertical = Vec3(0, 2, 0)
+    origin = Vec3(0, 0, 0)
+    world = HitableList()
+    world.append(Sphere(Vec3(0, 0, -1), 0.5))
+    world.append(Sphere(Vec3(0, -100.5, -1), 100))
+
+    pbar = ProgressBar(widgets=['Percentage ', Percentage(), ' ', ETA(),' ', Bar()], maxval=nx*ny).start()
+
     with open('image.ppm', 'w') as f:
-        nx = 200
-        ny = 100
         f.write('P3\n{} {}\n255\n'.format(nx, ny))
-
-        lower_left = Vec3(-2, -1, -1)
-        horizontal = Vec3(4, 0, 0)
-        vertical = Vec3(0, 2, 0)
-        origin = Vec3(0, 0, 0)
-        world = HitableList()
-        world.append(Sphere(Vec3(0, 0, -1), 0.5))
-        world.append(Sphere(Vec3(0, -100.5, -1), 100))
-
-        for j in xrange(ny-1, -1, -1):
+        for y, j in enumerate(xrange(ny-1, -1, -1)):
             for i in xrange(nx):
                 u = float(i) / nx
                 v = float(j) / ny
@@ -42,3 +46,7 @@ if __name__ == '__main__':
                 ig = int(255.99 * col.g)
                 ib = int(255.99 * col.b)
                 f.write('{} {} {}\n'.format(ir, ig, ib))
+
+                pbar.update(y * nx + i)
+    pbar.finish()
+    print("Done")
