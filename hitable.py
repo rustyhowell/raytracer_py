@@ -3,7 +3,7 @@ from vector3 import Vec3, dot
 from math import sqrt
 from ray import Ray
 
-HitRecord = namedtuple("HitRecord", ['t', 'p', 'normal'])
+HitRecord = namedtuple("HitRecord", ['t', 'p', 'normal', 'material'])
 
 class Hitable:
 
@@ -20,9 +20,10 @@ class Hitable:
 
 class Sphere(Hitable):
 
-    def __init__(self, center, radius):
+    def __init__(self, center, radius, material):
         self.center = center
         self.radius = radius
+        self.material = material
 
     def hit(self, ray_, t_min, t_max):
         assert isinstance(ray_, Ray)
@@ -38,7 +39,8 @@ class Sphere(Hitable):
                 p = ray_.point_at_parameter(temp)
                 rec = HitRecord(t=temp,
                                 p=p,
-                                normal=(p - self.center) / self.radius
+                                normal=(p - self.center) / self.radius,
+                                material=self.material
                                 )
 
                 return True, rec
@@ -48,7 +50,8 @@ class Sphere(Hitable):
                 p = ray_.point_at_parameter(temp)
                 rec = HitRecord(t=temp,
                                 p=p,
-                                normal=(p - self.center) / self.radius
+                                normal=(p - self.center) / self.radius,
+                                material=self.material
                                 )
                 return True, rec
 

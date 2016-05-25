@@ -1,4 +1,6 @@
 import math
+from random import random
+
 
 class Vec3:
     def __init__(self, e0, e1, e2):
@@ -118,3 +120,13 @@ def unit_vector(v):
 
 def dot(this, other):
     return this.e0 * other.e0 + this.e1 * other.e1 + this.e2 * other.e2
+
+
+def random_in_unit_sphere():
+    while True:
+        p = Vec3(random(), random(), random()) * 2.0 - Vec3(1, 1, 1)
+        if dot(p, p) < 1.0:
+            return p
+
+def reflect(v, n):
+    return v - n * dot(v, n) * 2.0
