@@ -28,11 +28,11 @@ class Metal(Material):
     def __init__(self, albedo, fuzz):
         assert isinstance(albedo, Vec3)
         self.albedo = albedo
-        self.fuzz = fuzz if fuzz < 1 else 1
+        self.fuzz = fuzz if fuzz < 1.0 else 1.0
 
     def scatter(self, ray_in, hit_record):
         reflected = reflect(unit_vector(ray_in.direction), hit_record.normal)
-        scattered = Ray(hit_record.p, reflected + self.fuzz * random_in_unit_sphere())
+        scattered = Ray(hit_record.p, reflected + random_in_unit_sphere() * self.fuzz)
         b = dot(scattered.direction, hit_record.normal) > 0.0
 
         return b, self.albedo, scattered
